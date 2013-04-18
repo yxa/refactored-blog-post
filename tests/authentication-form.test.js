@@ -3,6 +3,18 @@ describe('Authentication Form',function(){
 
   var authenticationForm, ajaxStub;
 
+  function okResponse() {
+    var d = $.Deferred();
+    d.resolve( { username: "testuser", userid: "userid", success: true } );
+    return d.promise();
+  };
+
+  function errorResponse() {
+    var d = $.Deferred();
+    d.reject({},{},"could not complete");
+    return d.promise();
+  };
+
   beforeEach(function(done) {
     ajaxStub = sinon.stub($, "ajax");
     authenticationForm = Object.create(AuthenticationForm);
@@ -20,12 +32,6 @@ describe('Authentication Form',function(){
 
   it("should submitForm with valid username and password", function(done) {
 
-      function okResponse() {
-        var d = $.Deferred();
-        d.resolve( { username: "testuser", userid: "userid", success: true } );
-        return d.promise();
-      };
-
       ajaxStub.returns(okResponse());
 
       $("#username").val("testuser");
@@ -38,8 +44,6 @@ describe('Authentication Form',function(){
         done();
       });
   });
-
-
 
   it("should submitForm with invalid username and password", function(done) {
       $("#username").val("testuser");
@@ -75,12 +79,6 @@ describe('Authentication Form',function(){
     $("#username").val("testuser");
     $("#password").val("password");
 
-    function errorResponse() {
-      var d = $.Deferred();
-      d.reject({},{},"could not complete");
-      return d.promise();
-    };
-
     ajaxStub.returns(errorResponse());
 
     authenticationForm.submitForm(function(error) {
@@ -91,12 +89,6 @@ describe('Authentication Form',function(){
   });
 
   it("should check authentication with valid user", function(done) {
-
-    function okResponse() {
-      var d = $.Deferred();
-      d.resolve( { username: "testuser", userid: "userid", success: true } );
-      return d.promise();
-    };
 
     ajaxStub.returns(okResponse());
 
@@ -114,12 +106,6 @@ describe('Authentication Form',function(){
   });
 
   it("should check authentication with missing XHR error", function(done) {
-
-    function errorResponse() {
-      var d = $.Deferred();
-      d.reject({},{},"could not complete");
-      return d.promise();
-    };
 
     ajaxStub.returns(errorResponse());
 
