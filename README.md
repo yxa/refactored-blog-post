@@ -3,6 +3,7 @@
 Refactored version of shane tomlinsons blog post <https://shanetomlinson.com/2013/testing-javascript-frontend-part-1-anti-patterns-and-fixes/> 
 
 * sinon ajax stubs
+* jquery ajax deferreds
 * mocha/chai instead of qunit
 * headless phantomjs test-runner
 

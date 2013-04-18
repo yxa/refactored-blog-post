@@ -76,9 +76,13 @@ var AuthenticationForm = (function($) {
   // checkAuthentication makes use of the ajax mock for unit testing.
   function checkAuthentication(username, password, done) {
 
-    this.ajax({ type: "POST", url: "/authenticate_user",
-      data: { username: username, password: password }
-    }).done(ajaxSuccess).fail(ajaxError);
+    this.ajax({
+              type: "POST",
+              url: "/authenticate_user",
+              data: { username: username, password: password }
+    })
+    .done(ajaxSuccess)
+    .fail(ajaxError);
 
     function ajaxSuccess(resp) {
       var user = null;

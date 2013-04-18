@@ -3,22 +3,22 @@ describe('Authentication Form',function(){
 
   var authenticationForm, ajaxStub;
 
-   beforeEach(function(done) {
-      ajaxStub = sinon.stub($, "ajax");
-      authenticationForm = Object.create(AuthenticationForm);
-      authenticationForm.init({ ajax: ajaxStub });
-      authenticationForm.init();
-      done();
-    });
+  beforeEach(function(done) {
+    ajaxStub = sinon.stub($, "ajax");
+    authenticationForm = Object.create(AuthenticationForm);
+    authenticationForm.init({ ajax: ajaxStub });
+    authenticationForm.init();
+    done();
+  });
 
-    afterEach(function(done) {
-      authenticationForm.teardown();
-      authenticationForm = null;
-      $.ajax.restore();
-      done();
-    });
+  afterEach(function(done) {
+    authenticationForm.teardown();
+    authenticationForm = null;
+    $.ajax.restore();
+    done();
+  });
 
-    it("should submitForm with valid username and password", function(done) {
+  it("should submitForm with valid username and password", function(done) {
 
       function okResponse() {
         var d = $.Deferred();
@@ -37,7 +37,7 @@ describe('Authentication Form',function(){
         expect($.ajax.calledOnce).to.be.true;
         done();
       });
-    });
+  });
 
 
 
@@ -58,7 +58,7 @@ describe('Authentication Form',function(){
         expect($("#authentication_failure")).to.be.visible;
         done();
       });
-    });
+  });
 
   it("should submitForm with missing username and password", function(done) {
     $("#username").val("");
