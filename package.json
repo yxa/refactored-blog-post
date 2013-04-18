@@ -1,0 +1,20 @@
+{
+  "name": "refactored-auth-form",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "latest",
+    "chai": "latest",
+    "mocha-phantomjs": "~2.0.1",
+    "sinon": "~1.6.0",
+    "phantomjs": "~1.9.0-0"
+  },
+  "description": "",
+  "scripts": {
+    "test": "node_modules/mocha-phantomjs/bin/mocha-phantomjs tests/index.html"
+  },
+  "repository": "",
+  "author": "torbjorn.josefsson@gmail.com",
+  "license": "MIT"
+}

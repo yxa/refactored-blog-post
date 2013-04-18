@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <style>
+    </style>
+  </head>  
+  <body>
+    <div id="mocha"></div>
+      <script src="../jquery.min.js"></script>
+      <script src="../node_modules/sinon/pkg/sinon.js"></script>
+      <script src="../node_modules/chai/chai.js"></script>
+      <script src="../node_modules/mocha/mocha.js"></script>
+      
+      <!-- Configure Mocha/Chai --!>
+      <script src="setup.js"></script>
+     
+      <!-- chai jquery asserts -->
+      <script src="chai-jquery.js"></script>
+      
+      <!-- Include the module to test -->
+      <script src="../authentication-form.js"></script>
+
+      <!-- Include the acctual tests -->
+      <script src="authentication-form.test.js"></script>
+      
+      <!--  Configure it so that it runs from the cmd -->
+      <script>
+        window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run()
+      </script>
+
+    
+    <!-- qunit style fixture , just hide the div -->
+    <div id="fixtures" style="position: absolute; top: -10000px; left: -10000px">
+      <form>
+        <input type="text" id="username" name="username"></input>
+        <input type="password" id="password" name="password"></input>
+      </form>
+
+      <p id="username_password_required" style="display: none;">
+        Both the username and password are required.
+      </p>
+
+      <p id="authentication_success" style="display: none">
+        You have successfully authenticated!
+      </p>
+
+      <p id="authentication_failure" style="display: none;">
+        This username/password combination is not correct.
+      </p>
+
+      <p id="authentication_error" style="display: none;">
+        There was a problem authenticating the user, please try again later.
+      </p>
+    <div>
+
+  </body>
+</html>
