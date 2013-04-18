@@ -29,10 +29,6 @@ var AuthenticationForm = (function($) {
       $("#authentication_form").off("submit", this.submitHandler);
     },
 
-    setAjaxAdapter: function(adapter) {
-      if(adapter) this.ajax = adapter;
-    },
-
     // BEGIN TESTING API
     // A build script could strip this out to save bytes.
     submitForm: submitForm,
@@ -79,28 +75,22 @@ var AuthenticationForm = (function($) {
 
   // checkAuthentication makes use of the ajax mock for unit testing.
   function checkAuthentication(username, password, done) {
-    this.ajax({
-      type: "POST",
-      url: "/authenticate_user",
-      data: {
-        username: username,
-        password: password
-      },
-      success: function(resp) {
-        var user = null;
-        if (resp.success) {
-          user = {
-            username: resp.username,
-            userid: resp.userid
-          };
-        }
 
-        done && done(null, user);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        done && done(errorThrown);
+    this.ajax({ type: "POST", url: "/authenticate_user",
+      data: { username: username, password: password }
+    }).done(ajaxSuccess).fail(ajaxError);
+
+    function ajaxSuccess(resp) {
+      var user = null;
+      if (resp.success) {
+        user = { username: resp.username, userid: resp.userid };
       }
-    });
+      done && done(null, user);
+    };
+
+    function ajaxError(jqXHR, textStatus, errorThrown) {
+      done && done(errorThrown);
+    };
   }
 
   function updateAuthenticationStatus(user) {
